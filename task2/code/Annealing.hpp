@@ -43,7 +43,7 @@ public:
             iterCurrent++;
             for (int i = 0; i < iterations; i++) {
                 convergenceCounter++;
-                GenericSchedule  tmpSchedule = mutation.mutate(currentSchedule);
+                GenericSchedule tmpSchedule = mutation.mutate(currentSchedule);
                 tmpCriterion = tmpSchedule.getCriterion();
 
                 if ((tmpCriterion <= currentCriterion) ||
@@ -57,10 +57,12 @@ public:
                     currentCriterion = currentSchedule.getCriterion();
                 }
             }
+#ifdef debug
             if (intName != 0) {
                 std::cout << FormatString::format("{red} THREAD #{}{reset}\n", intName);
             }
             std::cout << FormatString::format("{blue} iter:{}, temp: {}, temp: {}, criteria: {}{reset}\n", iterCurrent, temperature.getCurrentTemp(), iterCurrent, getCriterion);
+#endif
             temperature.temperatureStep(iterCurrent);
         }
 
@@ -112,9 +114,10 @@ GenericSchedule  ParallelAlgo(GenericSchedule  initialSchedule_, Temperature ini
             currentConvergence = 0;
             initialSchedule = protectedSolution;
         }
-
+#ifdef debug
         std::cout << FormatString::format("{blue} Current criterion value: {}; convergence: {}\n{reset}",
                                           protectedSolution.getCriterion(), currentConvergence);
+#endif
     }
 
     return protectedSolution;

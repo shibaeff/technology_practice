@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.26)
-project(Capybara_Annealing_Simulation)
+project(bin)
 
 set(CMAKE_CXX_STANDARD 14)
 
 include_directories(code)
 
-add_executable(Capybara_Annealing_Simulation
+add_executable(bin
         main.cpp
         code/Annealing.hpp
         code/Schedule.hpp

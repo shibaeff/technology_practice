@@ -23,7 +23,11 @@ public:
         std::uniform_int_distribution<> jobsChoiceMaker(1, schedule.getNumOfJobs());
         std::uniform_int_distribution<> cpuChoiceMaker(0, schedule.getNumOfCPUs() - 1);
 
-        for (unsigned long i = 1; 150 * i <= schedule.getNumOfJobs(); i++) {
+        auto iterations = schedule.getNumOfJobs() / 150;
+        if (iterations == 0) {
+            iterations = 4;
+        }
+        for (unsigned long i = 0; i < iterations; i++) {
             unsigned long jobToMove = jobsChoiceMaker(gen);
             removeJob(schedule, jobToMove);
             auto chosenCPU = cpuChoiceMaker(gen);
