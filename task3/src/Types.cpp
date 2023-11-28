@@ -176,3 +176,11 @@ Power::Power(std::vector<double> coefficients) {
     for (int idx = 0; idx < coefficients.size(); idx++)
         Coefficients[coefficients[idx]] = 1;
 }
+
+int TFunc::getPrecision() const {
+    return precision;
+}
+
+void TFunc::setPrecision(int precision) {
+    TFunc::precision = precision;
+}

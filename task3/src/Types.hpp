@@ -19,7 +19,12 @@ public:
 
     virtual std::shared_ptr<TFunc> Copy() = 0;
 
+protected:
     int precision;
+public:
+    int getPrecision() const;
+
+    void setPrecision(int precision);
 };
 
 class Composition : public TFunc {

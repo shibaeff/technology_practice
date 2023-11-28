@@ -43,19 +43,19 @@ public:
 
     std::shared_ptr<TFunc> Create(const std::string &type) {
         auto t = RegisteredCreators[type]->Produce();
-        t->precision = precision;
+        t->setPrecision(precision);
         return t;
     }
 
     std::shared_ptr<TFunc> Create(const std::string &type, double num) {
         auto t = RegisteredCreators[type]->Produce(num);
-        t->precision = precision;
+        t->setPrecision(precision);
         return t;
     }
 
     std::shared_ptr<TFunc> Create(const std::string &type, std::vector<double> parameters) {
         auto t = RegisteredCreators[type]->Produce(parameters);
-        t->precision = precision;
+        t->setPrecision(precision);
         return t;
     }
 
