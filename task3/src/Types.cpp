@@ -2,6 +2,17 @@
 
 #include "Types.hpp"
 
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <iomanip>
+
+std::string to_string(float number, int precision) {
+    std::stringstream stream;
+    stream << std::fixed << std::setprecision(precision) << number;
+    return stream.str();
+}
+
 Composition::Composition(TFunc &_other, TFunc &_another, std::string type_value) :
         other(_other.Copy()), another(_another.Copy()), type(type_value) {}
 
@@ -72,7 +83,7 @@ std::string Exponential::ToString() const {
     if (factor == 0)
         return "1";
     else
-        return "exp(" + std::to_string(factor) + "*x)";
+        return "exp(" + to_string(factor, precision) + "*x)";
 }
 
 std::shared_ptr<TFunc> Exponential::Copy() {
@@ -115,9 +126,9 @@ std::string Polynomial::ToString() const {
     for (auto &[key, val]: Coefficients) {
         if (val != 0)
             if (key == 0)
-                res += std::to_string(val) + " + ";
+                res += to_string(val, precision) + " + ";
             else
-                res += std::to_string(val) + "*x**" + std::to_string(key) + " + ";
+                res += to_string(val, precision) + "*x**" + to_string(key, precision) + " + ";
     }
     return res.substr(0, res.length() - 3);
 }

@@ -8,7 +8,7 @@
 
 class FunctionFactory {
 public:
-    FunctionFactory() {
+    FunctionFactory(int precision_ = 3): precision(precision_) {
         RegisterAdapters();
     }
 
@@ -42,21 +42,30 @@ public:
 
 
     std::shared_ptr<TFunc> Create(const std::string &type) {
-        return RegisteredCreators[type]->Produce();
+        auto t = RegisteredCreators[type]->Produce();
+        t->precision = precision;
+        return t;
     }
 
     std::shared_ptr<TFunc> Create(const std::string &type, double num) {
-        return RegisteredCreators[type]->Produce(num);
+        auto t = RegisteredCreators[type]->Produce(num);
+        t->precision = precision;
+        return t;
     }
 
     std::shared_ptr<TFunc> Create(const std::string &type, std::vector<double> parameters) {
-        return RegisteredCreators[type]->Produce(parameters);
+        auto t = RegisteredCreators[type]->Produce(parameters);
+        t->precision = precision;
+        return t;
     }
 
 private:
     using TCreatorPtr = std::shared_ptr<AbstractProducer>;
     using TRegisteredCreators = std::map<std::string, TCreatorPtr>;
+
     TRegisteredCreators RegisteredCreators;
+
+    int precision;
 
     void RegisterAdapters() {
         RegisteredCreators["ident"] = std::make_shared<FunctionProducer<Identity>>();

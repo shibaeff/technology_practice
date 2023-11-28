@@ -4,7 +4,7 @@
 #include "src/Factory.hpp"
 
 int main() {
-    FunctionFactory factory;
+    FunctionFactory factory(4);
     std::vector<std::shared_ptr<TFunc>> cont;
     auto f = factory.Create("power", {1, 2, 10}); // Power: x^2
     cont.push_back(f);

@@ -18,6 +18,8 @@ public:
     virtual double Derivative(double num) = 0;
 
     virtual std::shared_ptr<TFunc> Copy() = 0;
+
+    int precision;
 };
 
 class Composition : public TFunc {
