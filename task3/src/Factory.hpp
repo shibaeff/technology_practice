@@ -5,7 +5,7 @@
 
 #include "Types.hpp"
 
-
+typedef std::shared_ptr<TFunc> TFunctionPtr ;
 class TFunctionFactory {
 public:
     TFunctionFactory(int precision_ = 3): precision(precision_) {

@@ -6,7 +6,7 @@
 
 int main() {
     TFunctionFactory factory(4);
-    std::vector<std::shared_ptr<TFunc>> cont;
+    std::vector<TFunctionPtr> cont;
     auto f = factory.Create("power", {1, 2, 10}); // Power: x^2
     cont.push_back(f);
     auto g = factory.Create("polynomial", {7, 0, 3, 15}); // Polynomial 7 + 3*x^2 + 15*x^3

@@ -14,7 +14,7 @@ double findRootUsingGradientDescent(GenericFunction &f, double initialGuess, dou
     int iter = 0;
     while (abs(h) >= tolerance and iter < maxIterations)
     {
-        double h = f(x) / f.Derivative(x);
+        h = f(x) / f.Derivative(x);
         // x(i+1) = x(i) - f(x) / f'(x)
         x = x - h;
         iter++;
