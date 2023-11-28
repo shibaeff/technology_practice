@@ -1,5 +1,5 @@
-#ifndef CYBERNETIC_FUNCTION_
-#define CYBERNETIC_FUNCTION_
+#ifndef TYPES
+#define TYPES
 
 #include <string>
 #include <memory>

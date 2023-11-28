@@ -1,5 +1,5 @@
-#ifndef CYBERNETIC_FACTORY_
-#define CYBERNETIC_FACTORY_
+#ifndef FACTORY
+#define FACTORY
 
 #include <map>
 
