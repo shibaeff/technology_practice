@@ -8,7 +8,7 @@ class FuncTestSuite : public testing::Test {
 };
 
 TEST(FuncTestSuite, FactoryTypesTest) {
-    FunctionFactory factory;
+    TFunctionFactory factory;
 
     // Изменяем порядок и параметры функций
     auto f1 = factory.Create("polynomial", {3, 4, 5});
@@ -33,7 +33,7 @@ TEST(FuncTestSuite, FactoryTypesTest) {
 }
 
 TEST(FuncTestSuite, String_rep_test) {
-    FunctionFactory factory;
+    TFunctionFactory factory;
 
     // New examples with different types and parameters
 

@@ -3,9 +3,10 @@
 #include <cmath>
 
 #include "../Factory.hpp"
+#include "../algorithm.hpp"
 
 TEST(FuncTestSuite, Arithmetic) {
-    FunctionFactory factory;
+    TFunctionFactory factory;
 
     // Создаем степенную функцию и константу
     auto f1 = factory.Create("power", 2); // x^2
@@ -35,7 +36,7 @@ TEST(FuncTestSuite, Arithmetic) {
 }
 
 TEST(FuncTestSuite, Derivation) {
-    FunctionFactory factory;
+    TFunctionFactory factory;
 
     // Первый случай: используем три разных функции
     auto f1 = factory.Create("const", 5);  // Константа 5
@@ -59,8 +60,22 @@ TEST(FuncTestSuite, Derivation) {
 
 
 TEST(FuncTestSuite, LogicError) {
-    FunctionFactory factory;
+    TFunctionFactory factory;
     auto poly = factory.Create("polynomial", {0, 1, 2, 3});
     ASSERT_THROW(*poly + "something", std::logic_error);
     ASSERT_THROW(*poly + poly, std::logic_error);
+}
+
+
+TEST(FuncTestSuite, RootAlgo) {
+    TFunctionFactory factory;
+
+    auto g = factory.Create("polynomial", {4, 1});
+    ASSERT_EQ(std::round(findRootUsingGradientDescent(*g, -10)), -4);
+    auto p = factory.Create("polynomial", {1, 0, -1});
+    ASSERT_EQ(std::round(findRootUsingGradientDescent(*p, -100)), -1);
+    ASSERT_EQ(std::round(findRootUsingGradientDescent(*p, 20)), 1);
+    auto h = factory.Create("polynomial", {8, 0, 0, -1});
+    ASSERT_EQ(std::round(findRootUsingGradientDescent(*h, 1000)), 2);
+
 }

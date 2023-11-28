@@ -2,9 +2,10 @@
 #include <vector>
 #include <memory>
 #include "src/Factory.hpp"
+#include "src/algorithm.hpp"
 
 int main() {
-    FunctionFactory factory(4);
+    TFunctionFactory factory(4);
     std::vector<std::shared_ptr<TFunc>> cont;
     auto f = factory.Create("power", {1, 2, 10}); // Power: x^2
     cont.push_back(f);
@@ -20,5 +21,8 @@ int main() {
 
     auto ident = factory.Create("ident", {1, 2});
     std::cout << ident->ToString() << "\n";
+
+    auto exp = *factory.Create("power", 5) + *factory.Create("polynomial", {10});
+    std::cout << exp.ToString() << "=0: "<< findRootUsingGradientDescent(exp, -100) << "\n";
     return 0;
 }

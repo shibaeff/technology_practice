@@ -13,9 +13,11 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-set(Function src/Factory.hpp src/Types.hpp src/Types.cpp)
+set(Function src/Factory.hpp src/Types.hpp src/Types.cpp
+        src/algorithm.hpp)
 
-add_library(funclib ${Function})
+add_library(funclib ${Function}
+        src/algorithm.hpp)
 
 add_executable(test src/tests/semantic_test.cpp src/tests/calc_test.cpp)
 target_link_libraries(test funclib)

@@ -6,9 +6,9 @@
 #include "Types.hpp"
 
 
-class FunctionFactory {
+class TFunctionFactory {
 public:
-    FunctionFactory(int precision_ = 3): precision(precision_) {
+    TFunctionFactory(int precision_ = 3): precision(precision_) {
         RegisterAdapters();
     }
 
