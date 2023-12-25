@@ -79,7 +79,8 @@ public:
         Board *newPopulation = new Board[sizeOfPopulation];
         srand(time(0));
         auto length = pop[0].Size * pop[0].Size;
-        for (int i = 0; i < sizeOfPopulation; i += 2) {
+        int i = 0;
+        while (i < sizeOfPopulation) {
             int par1_index = rand() % sizeOfPopulation;
             int par2_index = rand() % sizeOfPopulation;
             double p = static_cast<double>(rand()) / RAND_MAX;
@@ -95,14 +96,8 @@ public:
                     newPopulation[i].Value[j] = pop[par2_index].Value[j];
                     newPopulation[i + 1].Value[j] = pop[par1_index].Value[j];
                 }
-            } else {
-                // Copy genes from parents directly if no crossover
-                for (int j = 0; j < length; j++) {
-                    newPopulation[i].Value[j] = pop[par1_index].Value[j];
-                    if (i + 1 < sizeOfPopulation)
-                        newPopulation[i + 1].Value[j] = pop[par2_index].Value[j];
-                }
             }
+            i += 2;
         }
 
         return newPopulation;

@@ -6,7 +6,7 @@
 
 #include "algo.h"
 
-#define TEST
+// #define TEST
 // #define OMP
 
 const int kboardSize = 50;
@@ -18,14 +18,15 @@ void mainloop() {
     double pmutInitial = 1.0 / (kboardSize * kboardSize);
     GameOfLife result(100);
 
-    std::ofstream logfile;
-    logfile.open("./runs/run.log");
+    std::ofstream logs;
+    logs.open("run.txt");
+    logs.close();
     std::ofstream report;
     std::string fname;
 
-    for (int i = 0; i <= 9; i++) {
+    for (int i = 0; i <= 1; i++) {
         double pmut = pmutInitial * pow(1.5, i);
-        for (int j = 0; j <= 9; j++) {
+        for (int j = 0; j <= 1; j++) {
 
             std::cout << "Running series " + std::to_string(i) + ", run " + std::to_string(j) << '\n';
             auto start = std::chrono::system_clock::now();
@@ -36,12 +37,12 @@ void mainloop() {
             std::chrono::duration<double> elapsed = end - start;
             std::cout << "\nJob " << i << ":" << j << " complete\n";
             std::cout << "with time" << elapsed.count() << " sec\n";
-            logfile << "experiment" << i << " run " << j << ":\n\tpmut = " << pmut << "; duration = "
-                    << elapsed.count();
-            logfile << "generations" << algo.GetStepsCount() << "; criterionBest = " << algo.GetBestValue() << "\n";
+            logs << "experiment" << i << " run " << j << ":\n\tpmut = " << pmut << "; duration = "
+                 << elapsed.count();
+            logs << "generations" << algo.GetStepsCount() << "; criterionBest = " << algo.GetBestValue() << "\n";
             Board *bestGameBoard = algo.GetBestboard();
             result.StartNew(bestGameBoard, -1);
-            report.open("./runs/series_" + std::to_string(i) + "_run_" + std::to_string(j) + "_sol.txt");
+            report.open("./series_" + std::to_string(i) + "_run_" + std::to_string(j) + "_sol.txt");
             for (int m = 0; m < 50; m++) {
                 for (int n = 0; n < 50; n++)
                     report << (((*bestGameBoard)[m][n] > 0) ? "X" : "-");
