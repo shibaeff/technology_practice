@@ -32,6 +32,12 @@ struct Board {
         }
     }
 
+    void Zero() {
+        for (int i = 0; i < Size * Size; i++) {
+            Value[i] = 0;
+        }
+    }
+
     Board(const Board *board) {
         Size = board->Size;
         if (Value == nullptr)
@@ -104,6 +110,14 @@ public:
         return start(visualisation);
     }
 
+    Board* GetWorld() {
+        if (!toggle) {
+            return &world;
+        } else {
+            return &otherWorld;
+        }
+    }
+
     Board world;
     bool isStatic = false;
     bool success = false;
@@ -117,8 +131,6 @@ private:
 
 GameOfLife::GameOfLife(Board *sh, int num_steps) : world(sh), otherWorld(sh->Size, 0), toggle(true) {
     maxSteps = num_steps;
-    print();
-    std::cout << "@@@@@@@\n";
 }
 
 void GameOfLife::print() {

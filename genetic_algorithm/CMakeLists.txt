@@ -3,8 +3,6 @@ project(genetic)
 
 set(CMAKE_CXX_STANDARD 17)
 add_executable(a game.h algo.h main.cpp)
+add_executable(visual game.h algo.h  visual.cpp)
+find_package(Curses REQUIRED)
 
-find_package(OpenMP)
-if(OpenMP_CXX_FOUND)
-    target_link_libraries(a PUBLIC OpenMP::OpenMP_CXX)
-endif()

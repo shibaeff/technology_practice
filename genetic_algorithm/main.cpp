@@ -6,7 +6,7 @@
 
 #include "algo.h"
 
-// #define TEST
+#define TEST
 // #define OMP
 
 const int kboardSize = 50;
